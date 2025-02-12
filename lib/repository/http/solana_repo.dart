@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dex_venger/const/http_const.dart';
+import 'package:dex_venger/model/api/solana/solana_token_item.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,9 +30,23 @@ class SolanaRepo {
       );
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 
-        debugPrint("JAY_LOG: , _getTokensForAddress, $responseData");
+        // Extract "items" array from "result"
+        final List<dynamic> itemsJson = jsonResponse["result"]["items"];
+
+        // Convert to List<Item>
+        final List<SolanaTokenItem> items = itemsJson.map((json) => SolanaTokenItem.fromJson(json)).toList();
+
+        for (SolanaTokenItem item in items) {
+          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, id = ${item.id}");
+          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, name = ${item.content.metadata?.name}");
+          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, link = ${item.content.links?.image}");
+
+          final currency = item.token_info?.price_info?.currency;
+          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, total price = ${item.token_info?.price_info?.total_price} $currency");
+        }
+
       } else {
         debugPrint("JAY_LOG: , _getTokensForAddress, Error: ${response.statusCode} - ${response.body}");
       }
