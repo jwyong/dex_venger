@@ -1,13 +1,15 @@
 import 'package:dex_venger/const/const.dart';
+import 'package:dex_venger/pages/add_wallet/add_wallet_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../base/base_state.dart';
 import 'generated/l10n.dart';
 import 'main_init_module.dart';
-import 'main_vm.dart';
+import 'notifiers/WalletAddressNotifier.dart';
 import 'pages/home_page.dart';
 
 // Snack bar key for access anywhere from the app.
@@ -15,7 +17,7 @@ final GlobalKey<ScaffoldMessengerState> mainSnackBarKey = GlobalKey<ScaffoldMess
 
 Future<void> main() async {
   await MainInitModule().init();
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -26,8 +28,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends BaseState<MyApp> {
-  late final MainVM _vm = MainVM()..bind(this);
-
   @override
   void initState() {
     super.initState();
@@ -39,20 +39,30 @@ class _MyAppState extends BaseState<MyApp> {
 
     // TODO: JAY_LOG - add willPopScope for Android back button
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (ctx, child) => MaterialApp(
-            scaffoldMessengerKey: mainSnackBarKey,
-            title: dexVengerTitle,
-            theme: ThemeData(primarySwatch: Colors.deepPurple),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            home: const HomePage()));
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (ctx, child) => MaterialApp(
+        scaffoldMessengerKey: mainSnackBarKey,
+        title: dexVengerTitle,
+        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        home: Consumer(
+          builder: (context, ref, child) {
+            final walletAddress = ref.watch(walletNotifierProvider);
+
+            return walletAddress == null || walletAddress.isEmpty
+                ? AddWalletPage() // Show Add Wallet page
+                : HomePage(); // Show TabView
+          },
+        ),
+      ),
+    );
   }
 }

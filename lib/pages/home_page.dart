@@ -1,6 +1,12 @@
 import 'package:dex_venger/base/base_state.dart';
+import 'package:dex_venger/const/const.dart';
+import 'package:dex_venger/notifiers/WalletAddressNotifier.dart';
+import 'package:dex_venger/pages/holdings/holdings_page.dart';
+import 'package:dex_venger/pages/settings/settings_page.dart';
+import 'package:dex_venger/pages/watchlist/watchlist_page.dart';
 import 'package:dex_venger/text_style/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +28,9 @@ class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
@@ -35,7 +43,7 @@ class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateM
                 child: SafeArea(
                     child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text("TESTING 123", style: TextStyles.title.apply(color: Colors.white)),
+                  child: Text(dexVengerTitle, style: TextStyles.title.apply(color: Colors.white)),
                 )),
               ),
               Align(
@@ -52,12 +60,36 @@ class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateM
             ],
           ),
         ),
-        body: Center(
-          child: Text("BODY"),
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            HoldingsPage(),
+            WatchlistPage(),
+            SettingsPage(),
+          ],
         ),
+        bottomNavigationBar: TabBar(
+          labelColor: Colors.deepPurple,
+          unselectedLabelColor: Colors.grey,
+          indicatorSize: TabBarIndicatorSize.label,
+          tabs: [
+            Tab(icon: Icon(Icons.account_balance_wallet), text: s.holdings),
+            Tab(icon: Icon(Icons.remove_red_eye), text: s.watchlist),
+            Tab(icon: Icon(Icons.settings), text: s.settings),
+          ],
+        ),
+
+        // TODO: JAY_LOG - FAB for chat in future?
         floatingActionButton: FloatingActionButton.small(
-            elevation: 0, backgroundColor: Colors.yellowAccent, onPressed: () {}, child: const Icon(Icons.adb)),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked);
-    // ));
+          elevation: 0,
+          backgroundColor: Colors.redAccent,
+          onPressed: () {
+            ProviderScope.containerOf(context).read(walletNotifierProvider.notifier).clearWallet();
+          },
+          child: const Icon(Icons.logout),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+    );
   }
 }

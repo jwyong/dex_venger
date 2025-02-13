@@ -22,6 +22,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "dexVenger": MessageLookupByLibrary.simpleMessage("DexVenger"),
+    "add_wallet_desc": MessageLookupByLibrary.simpleMessage(
+      "Please add your wallet address to proceed.",
+    ),
+    "add_wallet_title": MessageLookupByLibrary.simpleMessage("Add Wallet"),
+    "enter_wallet_address": MessageLookupByLibrary.simpleMessage(
+      "Enter wallet address",
+    ),
+    "holdings": MessageLookupByLibrary.simpleMessage("Holdings"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "paste": MessageLookupByLibrary.simpleMessage("Paste"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "wallet_address_invalid": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid wallet address",
+    ),
+    "watchlist": MessageLookupByLibrary.simpleMessage("Watchlist"),
   };
 }

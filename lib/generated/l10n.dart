@@ -55,9 +55,69 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `DexVenger`
-  String get dexVenger {
-    return Intl.message('DexVenger', name: 'dexVenger', desc: '', args: []);
+  /// `Please enter a valid wallet address`
+  String get wallet_address_invalid {
+    return Intl.message(
+      'Please enter a valid wallet address',
+      name: 'wallet_address_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Wallet`
+  String get add_wallet_title {
+    return Intl.message(
+      'Add Wallet',
+      name: 'add_wallet_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add your wallet address to proceed.`
+  String get add_wallet_desc {
+    return Intl.message(
+      'Please add your wallet address to proceed.',
+      name: 'add_wallet_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter wallet address`
+  String get enter_wallet_address {
+    return Intl.message(
+      'Enter wallet address',
+      name: 'enter_wallet_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste`
+  String get paste {
+    return Intl.message('Paste', name: 'paste', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Holdings`
+  String get holdings {
+    return Intl.message('Holdings', name: 'holdings', desc: '', args: []);
+  }
+
+  /// `Watchlist`
+  String get watchlist {
+    return Intl.message('Watchlist', name: 'watchlist', desc: '', args: []);
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
 }
 

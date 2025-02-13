@@ -53,9 +53,8 @@ dependencies:
   # Screen util
   flutter_screenutil: ^5.8.4
 
-  # Mobx: https://pub.dev/packages/mobx
-  mobx: ^2.1.4
-  flutter_mobx: ^2.3.0
+  # Riverpod reactive state management, better than mobx
+  flutter_riverpod: ^2.4.9
 
   # SharedPrefs
   shared_preferences: ^2.2.0
@@ -73,9 +72,6 @@ dev_dependencies:
 
   # Json parsing: https://pub.dev/packages/json_serializable
   json_serializable: ^6.9.0
-
-  # Reactive observable: https://pub.dev/packages/mobx_codegen
-  mobx_codegen: ^2.3.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

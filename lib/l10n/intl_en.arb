@@ -1,3 +1,11 @@
 {
-  "dexVenger": "DexVenger"
+  "wallet_address_invalid": "Please enter a valid wallet address",
+  "add_wallet_title": "Add Wallet",
+  "add_wallet_desc": "Please add your wallet address to proceed.",
+  "enter_wallet_address": "Enter wallet address",
+  "paste": "Paste",
+  "next": "Next",
+  "holdings": "Holdings",
+  "watchlist": "Watchlist",
+  "settings": "Settings"
 }
