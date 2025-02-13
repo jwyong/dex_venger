@@ -2,12 +2,12 @@ import 'package:dex_venger/const/sp_const.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final walletNotifierProvider = StateNotifierProvider<WalletNotifier, String?>(
-      (ref) => WalletNotifier(),
+final walletAddressVMProvider = StateNotifierProvider<WalletAddressVM, String?>(
+      (ref) => WalletAddressVM(),
 );
 
-class WalletNotifier extends StateNotifier<String?> {
-  WalletNotifier() : super(null) {
+class WalletAddressVM extends StateNotifier<String?> {
+  WalletAddressVM() : super(null) {
     _loadWallet();
   }
 

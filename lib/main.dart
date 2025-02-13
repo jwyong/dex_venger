@@ -1,5 +1,6 @@
 import 'package:dex_venger/const/const.dart';
 import 'package:dex_venger/pages/add_wallet/add_wallet_page.dart';
+import 'package:dex_venger/universal_notifier/wallet_address_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../base/base_state.dart';
 import 'generated/l10n.dart';
 import 'main_init_module.dart';
-import 'notifiers/WalletAddressNotifier.dart';
 import 'pages/home_page.dart';
 
 // Snack bar key for access anywhere from the app.

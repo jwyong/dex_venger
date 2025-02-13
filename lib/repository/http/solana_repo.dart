@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:dex_venger/base/resource.dart';
 import 'package:dex_venger/const/http_const.dart';
 import 'package:dex_venger/model/api/solana/solana_token_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+
+final solanaRepo = Provider((ref) => SolanaRepo());
 
 /// Solana related APIs to get blockchain data (Helius)
 class SolanaRepo {
 // Get list of fungible tokens (coins) from a given wallet address
-  Future<List<String>?> getTokensForAddress(String walletAddress) async {
+  Future<Resource<String>?> getTokensForAddress(String walletAddress) async {
     final apiUrl = '$apiHelius$apiKeyHelius';
     final Map<String, dynamic> requestData = {
       "jsonrpc": "2.0",
