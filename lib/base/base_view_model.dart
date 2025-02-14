@@ -2,8 +2,8 @@ import 'package:dex_venger/database/my_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-abstract class BaseViewModel<T> extends StateNotifier<AsyncValue<T?>> {
-  BaseViewModel(T? initialState) : super(AsyncValue.data(initialState));
+abstract class BaseViewModel<T> extends StateNotifier<AsyncValue<T>> {
+  BaseViewModel(T initialState) : super(AsyncValue.data(initialState));
 
   /// Set loading state
   void setLoading() {

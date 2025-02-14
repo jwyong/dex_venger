@@ -56,11 +56,18 @@ dependencies:
   # Riverpod reactive state management, better than mobx
   flutter_riverpod: ^2.4.9
 
+  # Paging listView
+  infinite_scroll_pagination: ^4.1.0
+
   # SharedPrefs
   shared_preferences: ^2.2.0
 
   # GetX: get database
   get: ^4.6.5
+
+  # Cached images over the network (widget)
+  cached_network_image: ^3.4.1
+
 
 dev_dependencies:
   flutter_test:

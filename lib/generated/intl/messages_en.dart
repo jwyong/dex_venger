@@ -34,6 +34,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "holdings": MessageLookupByLibrary.simpleMessage("Holdings"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_wallet": MessageLookupByLibrary.simpleMessage(
+      "No wallet added, please add a wallet address to begin.",
+    ),
     "paste": MessageLookupByLibrary.simpleMessage("Paste"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "wallet_address_invalid": MessageLookupByLibrary.simpleMessage(

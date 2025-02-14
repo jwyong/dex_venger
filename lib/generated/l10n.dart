@@ -129,6 +129,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No wallet added, please add a wallet address to begin.`
+  String get no_wallet {
+    return Intl.message(
+      'No wallet added, please add a wallet address to begin.',
+      name: 'no_wallet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
