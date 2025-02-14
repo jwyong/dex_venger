@@ -2,10 +2,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'solana_token_item.g.dart';
 
+/// https://docs.helius.dev/compression-and-das-api/digital-asset-standard-das-api/search-assets
 @JsonSerializable(explicitToJson: true)
 class SolanaTokenItem {
   final String id;
-  final Content content;
+  final Content? content;
   // final Ownership ownership;
   final TokenInfo? token_info;
 

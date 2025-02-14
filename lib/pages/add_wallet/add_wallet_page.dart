@@ -76,7 +76,17 @@ class AddWalletPage extends BaseStatelessWidget {
                 return SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => addWalletVM.addWalletOnClick(ref, _walletController.text),
+                    onPressed: () async {
+                      final result = await addWalletVM.addWalletOnClick(ref, _walletController.text);
+                      if (result.isSuccess != true) {
+                        if (!context.mounted) return;
+
+                        final msg = 'Error ${result.errorCode}: ${result.errorMessage ?? s.error_generic}';
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(msg)),
+                        );
+                      }
+                    },
                     child: Text(s.next),
                   ),
                 );

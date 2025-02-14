@@ -119,6 +119,16 @@ class S {
   String get settings {
     return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
+
+  /// `Something went wrong, please try again later.`
+  String get error_generic {
+    return Intl.message(
+      'Something went wrong, please try again later.',
+      name: 'error_generic',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,18 +1,19 @@
 import 'dart:convert';
 
 import 'package:dex_venger/base/resource.dart';
+import 'package:dex_venger/const/const.dart';
 import 'package:dex_venger/const/http_const.dart';
 import 'package:dex_venger/model/api/solana/solana_token_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-final solanaRepo = Provider((ref) => SolanaRepo());
+final solanaHttpRepo = Provider((ref) => SolanaHttpRepo());
 
 /// Solana related APIs to get blockchain data (Helius)
-class SolanaRepo {
+class SolanaHttpRepo {
 // Get list of fungible tokens (coins) from a given wallet address
-  Future<Resource<String>?> getTokensForAddress(String walletAddress) async {
+  Future<Resource<List<SolanaTokenItem>>?> getTokensForAddress(String walletAddress) async {
     final apiUrl = '$apiHelius$apiKeyHelius';
     final Map<String, dynamic> requestData = {
       "jsonrpc": "2.0",
@@ -42,22 +43,13 @@ class SolanaRepo {
         // Convert to List<Item>
         final List<SolanaTokenItem> items = itemsJson.map((json) => SolanaTokenItem.fromJson(json)).toList();
 
-        for (SolanaTokenItem item in items) {
-          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, id = ${item.id}");
-          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, name = ${item.content.metadata?.name}");
-          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, link = ${item.content.links?.image}");
-
-          final currency = item.token_info?.price_info?.currency;
-          debugPrint("JAY_LOG: SolanaRepo, getTokensForAddress, total price = ${item.token_info?.price_info?.total_price} $currency");
-        }
+        return Resource.success(data: items);
 
       } else {
-        debugPrint("JAY_LOG: , _getTokensForAddress, Error: ${response.statusCode} - ${response.body}");
+        return Resource.error(code: response.statusCode, msg: response.body);
       }
     } catch (e) {
-      debugPrint("JAY_LOG: , _getTokensForAddress, Exception: $e");
+      return Resource.error(code: errorCodeException, msg: e.toString());
     }
-
-    return ["testing"];
   }
 }

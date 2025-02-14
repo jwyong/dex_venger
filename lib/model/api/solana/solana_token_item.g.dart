@@ -9,7 +9,9 @@ part of 'solana_token_item.dart';
 SolanaTokenItem _$SolanaTokenItemFromJson(Map<String, dynamic> json) =>
     SolanaTokenItem(
       id: json['id'] as String,
-      content: Content.fromJson(json['content'] as Map<String, dynamic>),
+      content: json['content'] == null
+          ? null
+          : Content.fromJson(json['content'] as Map<String, dynamic>),
       token_info: json['token_info'] == null
           ? null
           : TokenInfo.fromJson(json['token_info'] as Map<String, dynamic>),
@@ -18,7 +20,7 @@ SolanaTokenItem _$SolanaTokenItemFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SolanaTokenItemToJson(SolanaTokenItem instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'content': instance.content.toJson(),
+      'content': instance.content?.toJson(),
       'token_info': instance.token_info?.toJson(),
     };
 

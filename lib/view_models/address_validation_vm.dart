@@ -1,4 +1,4 @@
-import 'package:dex_venger/repository/http/solana_repo.dart';
+import 'package:dex_venger/repository/http/solana_http_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final addressValidationVMProvider =
