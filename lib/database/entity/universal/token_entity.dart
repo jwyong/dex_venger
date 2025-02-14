@@ -1,44 +1,21 @@
+import 'package:dex_venger/model/enum/token_chain.dart';
 import 'package:drift/drift.dart';
 
-/// Token of a wallet address
+/// Token basic details, regardless of what network it's on (unique by token address)
 class TokenEntity extends Table {
-  TextColumn get id => text()();
-  @override
-  Set<Column> get primaryKey => {id};
+  // Token address (String)
+  TextColumn get tokenAddress => text()();
 
-  // Basic data
+  @override
+  Set<Column> get primaryKey => {tokenAddress};
+
+  // Token display data
+  TextColumn get imgUrl => text().nullable()();
+
   TextColumn get name => text().nullable()();
+
   TextColumn get symbol => text().nullable()();
 
-
-  /// TODO: JAY_LOG - OLD CODE
-  // // Draw details
-  // TextColumn get status => text().nullable()(); // "COMPLETED" | "C" etc
-  // DateTimeColumn get drawDate => dateTime()(); // drawDate in unix timestamp format (seconds). ori: "30/07/2023"
-  // TextColumn get drawNo => text().nullable()(); // "5618/23"
-  //
-  // /// 1+3d
-  // TextColumn get p1 => text().nullable()(); // Number 1 "4123"
-  // TextColumn get p2 => text().nullable()(); // Number 2 "5425"
-  // TextColumn get p3 => text().nullable()(); // Number 3 "1980"
-  // TextColumn get starterList => text().map(const StringListConverter()).nullable()();
-  // TextColumn get consolidateList => text().map(const StringListConverter()).nullable()();
-  //
-  // // 1+3d bonus (zodiac)
-  // TextColumn get zodiac3dp1 => text().nullable()(); // Number 1 "5"
-  // TextColumn get zodiac3dp2 => text().nullable()(); // Number 1 "4"
-  // TextColumn get zodiac3dp3 => text().nullable()(); // Number 1 "8"
-  //
-  // // Generated: full 1+3d list
-  // TextColumn get full4dList => text().map(const StringListConverter()).nullable()();
-  //
-  // /// 3+3d
-  // TextColumn get p13p3d => text().nullable()(); // Number 1 4d "192462"
-  // TextColumn get p23p3d => text().nullable()(); // Number 2 4d "975762"
-  // TextColumn get p33p3d => text().nullable()(); // Number 3 4d "402430"
-  // TextColumn get starterList3p3d => text().map(const StringListConverter()).nullable()();
-  // TextColumn get consolidateList3p3d => text().map(const StringListConverter()).nullable()();
-  //
-  // // Generated: full 3+3d list
-  // TextColumn get full6dList => text().map(const StringListConverter()).nullable()();
+  // Chain which this token is on. Can have same "coin" on different chains.
+  IntColumn get network => intEnum<TokenChain>().withDefault(Constant(TokenChain.SOL.index))();
 }

@@ -7,5 +7,6 @@
   "next": "Next",
   "holdings": "Holdings",
   "watchlist": "Watchlist",
-  "settings": "Settings"
+  "settings": "Settings",
+  "error_generic": "Something went wrong, please try again later."
 }

@@ -1,6 +1,7 @@
 import 'package:dex_venger/base/base_stateless_widget.dart';
 import 'package:dex_venger/const/sp_const.dart';
-import 'package:dex_venger/notifiers/WalletAddressNotifier.dart';
+import 'package:dex_venger/view_models/add_wallet_vm.dart';
+import 'package:dex_venger/view_models/wallet_address_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +19,7 @@ class AddWalletPage extends BaseStatelessWidget {
     }
   }
 
-  // TODO: JAY_LOG - validate address, differentiate Solana and the rest
-  Future<void> _saveWallet(BuildContext context, WidgetRef ref) async {
+  Future<void> _validateAddress(BuildContext context, WidgetRef ref) async {
     final walletAddress = _walletController.text.trim();
     if (walletAddress.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -27,13 +27,12 @@ class AddWalletPage extends BaseStatelessWidget {
       );
       return;
     }
-
-    // Update Riverpod state (update sp there as well)
-    ref.read(walletNotifierProvider.notifier).setWallet(walletAddress);
   }
 
   @override
   Widget build(BuildContext context) {
+    final addWalletVM = ProviderScope.containerOf(context).read(addWalletVMProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(title: Text(s.add_wallet_title)),
       body: Padding(
@@ -77,7 +76,17 @@ class AddWalletPage extends BaseStatelessWidget {
                 return SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => _saveWallet(context, ref),
+                    onPressed: () async {
+                      final result = await addWalletVM.addWalletOnClick(ref, _walletController.text);
+                      if (result.isSuccess != true) {
+                        if (!context.mounted) return;
+
+                        final msg = 'Error ${result.errorCode}: ${result.errorMessage ?? s.error_generic}';
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(msg)),
+                        );
+                      }
+                    },
                     child: Text(s.next),
                   ),
                 );

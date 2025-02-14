@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_wallet_address": MessageLookupByLibrary.simpleMessage(
       "Enter wallet address",
     ),
+    "error_generic": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong, please try again later.",
+    ),
     "holdings": MessageLookupByLibrary.simpleMessage("Holdings"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "paste": MessageLookupByLibrary.simpleMessage("Paste"),

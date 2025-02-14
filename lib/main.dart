@@ -1,15 +1,14 @@
 import 'package:dex_venger/const/const.dart';
 import 'package:dex_venger/pages/add_wallet/add_wallet_page.dart';
+import 'package:dex_venger/view_models/wallet_address_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../base/base_state.dart';
 import 'generated/l10n.dart';
 import 'main_init_module.dart';
-import 'notifiers/WalletAddressNotifier.dart';
 import 'pages/home_page.dart';
 
 // Snack bar key for access anywhere from the app.
@@ -27,7 +26,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends BaseState<MyApp> {
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
@@ -55,7 +54,7 @@ class _MyAppState extends BaseState<MyApp> {
         supportedLocales: S.delegate.supportedLocales,
         home: Consumer(
           builder: (context, ref, child) {
-            final walletAddress = ref.watch(walletNotifierProvider);
+            final walletAddress = ref.watch(walletAddressVMProvider);
 
             return walletAddress == null || walletAddress.isEmpty
                 ? AddWalletPage() // Show Add Wallet page

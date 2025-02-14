@@ -8,14 +8,12 @@ part 'token_dao.g.dart';
 class TokenDao extends DatabaseAccessor<MyDatabase> with _$TokenDaoMixin {
   TokenDao(MyDatabase db) : super(db);
 
-  /// TODO: JAY_LOG - old code
-  /// Insert
-  // Future<void> insertDmcHotList(List<DmcHotEntityCompanion> list) async =>
-  //     await db.batch((batch) => batch.insertAllOnConflictUpdate(db.dmcHotEntity, list));
-  //
-  // // Get hot lists in streams
-  // Stream<List<DmcHotEntityData>> getDmcHotListStream(TimePeriod selectedTimePeriod) =>
-  //     (select(dmcHotEntity)..where((tbl) => tbl.timePeriodIndex.equals(selectedTimePeriod.index))).watch();
-  //
-  // Future<int> clearDb() async => await delete(dmcHotEntity).go();
+  /// Bulk insert tokens to db, ignore if already exists
+  Future<void> insertTokens(List<TokenEntityCompanion>? tokens) async {
+    if (tokens?.isNotEmpty == true) {
+      await db.batch((batch) {
+        batch.insertAll(db.tokenEntity, tokens!, mode: InsertMode.insertOrIgnore);
+      });
+    }
+  }
 }

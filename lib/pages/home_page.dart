@@ -1,10 +1,10 @@
-import 'package:dex_venger/base/base_state.dart';
+import 'package:dex_venger/base/base_home_state.dart';
 import 'package:dex_venger/const/const.dart';
-import 'package:dex_venger/notifiers/WalletAddressNotifier.dart';
 import 'package:dex_venger/pages/holdings/holdings_page.dart';
 import 'package:dex_venger/pages/settings/settings_page.dart';
 import 'package:dex_venger/pages/watchlist/watchlist_page.dart';
 import 'package:dex_venger/text_style/text_styles.dart';
+import 'package:dex_venger/view_models/wallet_address_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends BaseHomeState<HomePage> with SingleTickerProviderStateMixin {
   // late final HomePageVM _vm = HomePageVM()..bind(this);
 
   // Tab bar + bottom nav bar
@@ -42,9 +42,9 @@ class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateM
                 color: Colors.deepPurple,
                 child: SafeArea(
                     child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(dexVengerTitle, style: TextStyles.title.apply(color: Colors.white)),
-                )),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(dexVengerTitle, style: TextStyles.title.apply(color: Colors.white)),
+                    )),
               ),
               Align(
                   alignment: Alignment.bottomCenter,
@@ -84,7 +84,7 @@ class _HomePageState extends BaseState<HomePage> with SingleTickerProviderStateM
           elevation: 0,
           backgroundColor: Colors.redAccent,
           onPressed: () {
-            ProviderScope.containerOf(context).read(walletNotifierProvider.notifier).clearWallet();
+            ProviderScope.containerOf(context).read(walletAddressVMProvider.notifier).clearWallet();
           },
           child: const Icon(Icons.logout),
         ),
