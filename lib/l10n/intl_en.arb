@@ -8,5 +8,6 @@
   "holdings": "Holdings",
   "watchlist": "Watchlist",
   "settings": "Settings",
-  "error_generic": "Something went wrong, please try again later."
+  "error_generic": "Something went wrong, please try again later.",
+  "no_wallet": "No wallet added, please add a wallet address to begin."
 }

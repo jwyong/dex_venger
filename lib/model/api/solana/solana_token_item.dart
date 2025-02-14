@@ -21,6 +21,11 @@ class SolanaTokenItem {
       _$SolanaTokenItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$SolanaTokenItemToJson(this);
+
+  @override
+  String toString() {
+    return 'SolanaTokenItem{id: $id, content: $content, token_info: $token_info}';
+  }
 }
 
 @JsonSerializable()
@@ -42,6 +47,11 @@ class Content {
       _$ContentFromJson(json);
 
   Map<String, dynamic> toJson() => _$ContentToJson(this);
+
+  @override
+  String toString() {
+    return 'Content{metadata: $metadata, links: $links}';
+  }
 }
 
 @JsonSerializable()
@@ -57,6 +67,11 @@ class Metadata {
       _$MetadataFromJson(json);
 
   Map<String, dynamic> toJson() => _$MetadataToJson(this);
+
+  @override
+  String toString() {
+    return 'Metadata{description: $description, name: $name, symbol: $symbol, token_standard: $token_standard}';
+  }
 }
 
 @JsonSerializable()
@@ -69,6 +84,11 @@ class Links {
       _$LinksFromJson(json);
 
   Map<String, dynamic> toJson() => _$LinksToJson(this);
+
+  @override
+  String toString() {
+    return 'Links{image: $image}';
+  }
 }
 
 // @JsonSerializable()
@@ -109,6 +129,11 @@ class TokenInfo {
       _$TokenInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$TokenInfoToJson(this);
+
+  @override
+  String toString() {
+    return 'TokenInfo{symbol: $symbol, balance: $balance, supply: $supply, decimals: $decimals, token_program: $token_program, associated_token_address: $associated_token_address, price_info: $price_info}';
+  }
 }
 
 // @JsonSerializable()
@@ -136,4 +161,9 @@ class PriceInfo {
       _$PriceInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$PriceInfoToJson(this);
+
+  @override
+  String toString() {
+    return 'PriceInfo{price_per_token: $price_per_token, total_price: $total_price, currency: $currency}';
+  }
 }

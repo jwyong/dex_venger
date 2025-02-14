@@ -2,6 +2,7 @@ import 'package:dex_venger/const/sp_const.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Global notifier for a selected wallet address. if null / empty, will show "Add wallet page".
 final walletAddressVMProvider = StateNotifierProvider<WalletAddressVM, String?>(
       (ref) => WalletAddressVM(),
 );
